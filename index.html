@@ -6,18 +6,19 @@
     <title>Lista Zakupów - Materiały Budowlane</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#007bff">
+    <meta name="theme-color" content="#212121">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lista Zakupów">
-    <meta name="description" content="Aplikacja do tworzenia listy zakupów materiałów budowlanych">
+    <meta name="description" content="Aplikacja do tworzenia listy zakupów materiałów budowlanych z systemem projektów">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     
     <!-- Favicon and Apple Touch Icons -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzAwN2JmZiIvPgo8cGF0aCBkPSJNOSAxMkgxOVYyMEg5VjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTIxIDEySDIzVjIwSDIxVjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTkgOEgyM1YxMEg5VjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiMwMDdiZmYiLz4KPHA+dGggZD0iTTUwIDY3SDEwN1YxMTNINTBWNjdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTE3IDY3SDEzMFYxMTNIMTE3VjY3WiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTUwIDQ1SDEzMFY1OEg1MFY0NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzIxMjEyMSIvPgo8cGF0aCBkPSJNOSAxMkgxOVYyMEg5VjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTIxIDEySDIzVjIwSDIxVjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTkgOEgyM1YxMEg5VjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiMyMTIxMjEiLz4KPHA+dGggZD0iTTUwIDY3SDEwN1YxMTNINTBWNjdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTE3IDY3SDEzMFYxMTNIMTE3VjY3WiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTUwIDQ1SDEzMFY1OEg1MFY0NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=">
+    
     <style>
         * {
             margin: 0;
@@ -25,50 +26,67 @@
             box-sizing: border-box;
         }
 
+        /* Główne style - ciemny motyw */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: #212121;
+            color: #FFFFFF;
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            touch-action: manipulation; /* Zapobiega podwójnemu zoom */
         }
 
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: white;
+            background: #2d2d2d;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
+        /* Header z selekcją projektu */
         .header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
+            background: linear-gradient(135deg, #212121, #212121);
             color: white;
             padding: 20px;
-            text-align: center;
             position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             margin-bottom: 5px;
+            text-align: center;
         }
 
-        .header p {
+        .project-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .project-info {
+            flex: 1;
+            text-align: center;
+        }
+
+        .current-project {
             font-size: 14px;
-            opacity: 0.9;
+            font-weight: 600;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
-        .reset-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .project-btn {
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
@@ -80,84 +98,88 @@
             backdrop-filter: blur(10px);
         }
 
-        .reset-btn:hover {
+        .project-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
         }
 
+        /* Lista zakupów */
         .shopping-list {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             overflow-y: auto;
+            background: #212121;
         }
 
         .item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 10px;
+            background: #2d2d2d;
+            border-radius: 12px;
+            margin-bottom: 8px;
             padding: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            border: 2px solid transparent;
         }
 
+        /* Wyróżnienie aktywnych pozycji */
         .item.active {
-            background: linear-gradient(145deg, #e3f2fd, #f8f9ff);
-            border-left-color: #2196f3;
+            background: #1a237e;
+            border-color: #1976d2;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
             transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
         }
 
         .item-info {
             flex: 1;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .item-name {
             font-size: 16px;
             font-weight: 500;
-            color: #495057;
-            transition: color 0.3s ease;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
         }
 
         .item.active .item-name {
-            color: #1976d2;
+            color: #90caf9;
             font-weight: 600;
         }
 
+        /* Badge z ilością */
         .quantity-badge {
-            background: linear-gradient(135deg, #2196f3, #1976d2);
+            background: linear-gradient(135deg, #1976d2, #1565c0);
             color: white;
             border-radius: 12px;
             padding: 4px 8px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
-            min-width: 24px;
+            min-width: 20px;
             text-align: center;
-            transform: scale(0);
             animation: popIn 0.3s ease forwards;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes popIn {
-            to {
-                transform: scale(1);
-            }
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Kontrolki +/- */
         .controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border: none;
             border-radius: 50%;
             font-size: 20px;
@@ -169,51 +191,62 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            user-select: none;
+            touch-action: manipulation; /* Zapobiega podwójnemu tap */
         }
 
         .btn:active {
-            transform: scale(0.9);
+            transform: scale(0.95);
         }
 
+        /* Przycisk zwiększania */
         .btn-increase {
-            background: linear-gradient(135deg, #28a745, #20c997);
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
             color: white;
-            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.4);
         }
 
         .btn-increase:hover {
+            background: linear-gradient(135deg, #388e3c, #2e7d32);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.5);
         }
 
+        /* Przycisk zmniejszania */
         .btn-decrease {
-            background: linear-gradient(135deg, #dc3545, #c82333);
+            background: linear-gradient(135deg, #c62828, #b71c1c);
             color: white;
-            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+            box-shadow: 0 2px 8px rgba(198, 40, 40, 0.4);
         }
 
         .btn-decrease:hover {
+            background: linear-gradient(135deg, #d32f2f, #c62828);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+            box-shadow: 0 4px 15px rgba(198, 40, 40, 0.5);
         }
 
+        /* Wyświetlanie ilości */
         .quantity-display {
-            min-width: 30px;
+            min-width: 35px;
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            color: #495057;
+            color: #FFFFFF;
+            background: #424242;
+            padding: 8px;
+            border-radius: 8px;
         }
 
+        /* Footer z przyciskiem OK */
         .footer {
-            background: white;
+            background: #2d2d2d;
             padding: 20px;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid #424242;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .stats {
@@ -221,19 +254,19 @@
         }
 
         .stats-text {
-            font-size: 14px;
-            color: #6c757d;
-            margin-bottom: 5px;
+            font-size: 13px;
+            color: #b0b0b0;
+            margin-bottom: 3px;
         }
 
         .stats-number {
             font-size: 18px;
             font-weight: bold;
-            color: #495057;
+            color: #FFFFFF;
         }
 
         .ok-btn {
-            background: linear-gradient(135deg, #007bff, #0056b3);
+            background: linear-gradient(135deg, #1976d2, #1565c0);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -242,18 +275,286 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
             position: relative;
             overflow: hidden;
         }
 
         .ok-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.5);
         }
 
         .ok-btn:active {
             transform: translateY(0);
+        }
+
+        /* Modal dla wyboru projektu */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #2d2d2d;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 80%;
+            width: 400px;
+            margin: 20px;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #424242;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Header modalu */
+        .modal-header {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        /* Zawartość modalu */
+        .modal-body {
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Lista projektów */
+        .project-list {
+            margin-bottom: 20px;
+        }
+
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #424242;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-item:hover {
+            background: #4a4a4a;
+        }
+
+        .project-item.active {
+            background: #1976d2;
+            color: white;
+        }
+
+        .project-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .delete-project-btn {
+            background: #c62828;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .delete-project-btn:hover {
+            background: #b71c1c;
+        }
+
+        /* Formularz nowego projektu */
+        .new-project-form {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #424242;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #FFFFFF;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #424242;
+            border-radius: 8px;
+            background: #212121;
+            color: #FFFFFF;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #1976d2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1565c0;
+        }
+
+        .btn-secondary {
+            background: #424242;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4a4a4a;
+        }
+
+        /* Modal footer */
+        .modal-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #424242;
+            background: #212121;
+        }
+
+        /* Summary modal styles */
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #424242;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-name {
+            flex: 1;
+            font-weight: 500;
+            color: #FFFFFF;
+        }
+
+        .summary-quantity {
+            font-weight: bold;
+            color: #1976d2;
+            background: #424242;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .total-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .back-btn {
+            background: #424242;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #4a4a4a;
+            transform: translateY(-1px);
+        }
+
+        /* Responsywność */
+        @media (max-width: 480px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .item {
+                margin-bottom: 6px;
+                padding: 12px;
+            }
+            
+            .btn {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+            
+            .project-selector {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .project-info {
+                order: -1;
+            }
         }
 
         /* Animacja ripple dla przycisków */
@@ -272,184 +573,77 @@
                 opacity: 0;
             }
         }
-
-        /* Modal dla podsumowania */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 90%;
-            max-height: 80%;
-            width: 400px;
-            margin: 20px;
-            overflow: hidden;
-            animation: slideUp 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .modal-header h2 {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-
-        .modal-body {
-            padding: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-name {
-            flex: 1;
-            font-weight: 500;
-            color: #495057;
-        }
-
-        .summary-quantity {
-            font-weight: bold;
-            color: #28a745;
-            background: #e8f5e8;
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-        .modal-footer {
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #f0f0f0;
-            background: #f8f9fa;
-        }
-
-        .total-text {
-            font-size: 16px;
-            font-weight: bold;
-            color: #495057;
-            margin-bottom: 15px;
-        }
-
-        .back-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #5a6268;
-            transform: translateY(-1px);
-        }
-
-        /* Responsywność */
-        @media (max-width: 480px) {
-            .container {
-                margin: 0;
-                border-radius: 0;
-            }
-            
-            .header {
-                padding: 15px;
-            }
-            
-            .item {
-                margin-bottom: 8px;
-                padding: 12px;
-            }
-            
-            .btn {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header z selekcją projektu -->
         <header class="header">
             <h1>Lista Zakupów</h1>
-            <p>Materiały budowlane</p>
-            <button class="reset-btn" onclick="resetList()">Wyczyść</button>
+            <div class="project-selector">
+                <button class="project-btn" onclick="showProjectModal()">Projekty</button>
+                <div class="project-info">
+                    <div class="current-project" id="currentProjectName">Wybierz projekt</div>
+                </div>
+                <button class="project-btn" onclick="resetCurrentProject()" id="resetBtn" style="display: none;">Wyczyść</button>
+            </div>
         </header>
 
+        <!-- Lista zakupów -->
         <main class="shopping-list" id="shoppingList">
-            <!-- Items will be generated by JavaScript -->
+            <div style="text-align: center; padding: 50px; color: #b0b0b0;">
+                <h3>Wybierz lub utwórz projekt</h3>
+                <p>Kliknij "Projekty" aby rozpocząć</p>
+            </div>
         </main>
 
+        <!-- Footer z przyciskiem OK -->
         <footer class="footer">
             <div class="stats">
                 <div class="stats-text">Wybrane pozycje:</div>
                 <div class="stats-number" id="selectedCount">0</div>
             </div>
-            <button class="ok-btn" onclick="showSummary()">OK</button>
+            <button class="ok-btn" onclick="showSummary()" id="okButton" disabled style="opacity: 0.5;">OK</button>
         </footer>
     </div>
 
-    <!-- Modal for summary -->
+    <!-- Modal dla projektów -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Zarządzanie Projektami</h2>
+                <p>Wybierz lub utwórz nowy projekt</p>
+            </div>
+            <div class="modal-body">
+                <!-- Lista istniejących projektów -->
+                <div class="project-list" id="projectList">
+                    <!-- Projekty będą tutaj generowane przez JS -->
+                </div>
+                
+                <!-- Formularz nowego projektu -->
+                <div class="new-project-form">
+                    <div class="form-group">
+                        <label for="newProjectName">Nazwa nowego projektu:</label>
+                        <input type="text" id="newProjectName" placeholder="np. Projekt 7600" maxlength="50">
+                    </div>
+                    <div class="form-buttons">
+                        <button class="btn-primary" onclick="createNewProject()">Utwórz</button>
+                        <button class="btn-secondary" onclick="hideProjectModal()">Anuluj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal dla podsumowania -->
     <div class="modal" id="summaryModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Lista Zakupów</h2>
-                <p>Podsumowanie materiałów</p>
+                <p id="summaryProjectName">Podsumowanie materiałów</p>
             </div>
             <div class="modal-body" id="summaryContent">
-                <!-- Summary items will be generated here -->
+                <!-- Pozycje podsumowania będą tutaj generowane -->
             </div>
             <div class="modal-footer">
                 <div class="total-text" id="totalText">Łącznie: 0 pozycji</div>
@@ -459,8 +653,10 @@
     </div>
 
     <script>
-        // Initial items data
-        const initialItems = [
+        // ==================== DANE I KONFIGURACJA ====================
+        
+        // Domyślna lista materiałów budowlanych
+        const defaultItems = [
             { id: 1, name: 'Strimel', quantity: 0 },
             { id: 2, name: 'Medium Sparkel', quantity: 0 },
             { id: 3, name: 'Jotun Sparkel', quantity: 0 },
@@ -475,24 +671,188 @@
             { id: 12, name: 'Farby', quantity: 0 }
         ];
 
-        let items = [...initialItems];
+        // Globalne zmienne
+        let currentProject = null;
+        let currentItems = [...defaultItems];
+        let projects = {};
 
-        // Load data from localStorage on page load
+        // ==================== ZARZĄDZANIE DANYMI ====================
+
+        // Ładowanie danych z localStorage
         function loadData() {
-            const savedData = localStorage.getItem('shoppingList');
-            if (savedData) {
-                items = JSON.parse(savedData);
+            try {
+                // Ładowanie listy projektów
+                const savedProjects = localStorage.getItem('shoppingProjects');
+                if (savedProjects) {
+                    projects = JSON.parse(savedProjects);
+                }
+
+                // Ładowanie ostatnio używanego projektu
+                const lastProject = localStorage.getItem('lastSelectedProject');
+                if (lastProject && projects[lastProject]) {
+                    selectProject(lastProject);
+                }
+            } catch (error) {
+                console.error('Błąd podczas ładowania danych:', error);
+                projects = {};
             }
+        }
+
+        // Zapisywanie danych do localStorage
+        function saveData() {
+            try {
+                // Zapisz listę projektów
+                localStorage.setItem('shoppingProjects', JSON.stringify(projects));
+                
+                // Zapisz ostatnio wybrany projekt
+                if (currentProject) {
+                    localStorage.setItem('lastSelectedProject', currentProject);
+                }
+            } catch (error) {
+                console.error('Błąd podczas zapisywania danych:', error);
+            }
+        }
+
+        // ==================== ZARZĄDZANIE PROJEKTAMI ====================
+
+        // Tworzenie nowego projektu
+        function createNewProject() {
+            const nameInput = document.getElementById('newProjectName');
+            const projectName = nameInput.value.trim();
+
+            if (!projectName) {
+                alert('Wprowadź nazwę projektu!');
+                return;
+            }
+
+            if (projects[projectName]) {
+                alert('Projekt o tej nazwie już istnieje!');
+                return;
+            }
+
+            // Utwórz nowy projekt z domyślną listą materiałów
+            projects[projectName] = [...defaultItems];
+            saveData();
+            
+            // Wybierz nowo utworzony projekt
+            selectProject(projectName);
+            
+            // Wyczyść formularz i zamknij modal
+            nameInput.value = '';
+            hideProjectModal();
+            
+            console.log('Utworzono nowy projekt:', projectName);
+        }
+
+        // Wybór projektu
+        function selectProject(projectName) {
+            if (!projects[projectName]) {
+                console.error('Projekt nie istnieje:', projectName);
+                return;
+            }
+
+            currentProject = projectName;
+            currentItems = [...projects[projectName]];
+            
+            // Aktualizuj interfejs
+            document.getElementById('currentProjectName').textContent = projectName;
+            document.getElementById('resetBtn').style.display = 'block';
+            document.getElementById('okButton').disabled = false;
+            document.getElementById('okButton').style.opacity = '1';
+            
             renderItems();
             updateStats();
+            saveData();
+            
+            console.log('Wybrany projekt:', projectName);
         }
 
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('shoppingList', JSON.stringify(items));
+        // Usuwanie projektu
+        function deleteProject(projectName) {
+            if (confirm(`Czy na pewno chcesz usunąć projekt "${projectName}"?\nTa akcja jest nieodwracalna.`)) {
+                delete projects[projectName];
+                
+                // Jeśli usuwamy aktualnie wybrany projekt
+                if (currentProject === projectName) {
+                    currentProject = null;
+                    currentItems = [...defaultItems];
+                    document.getElementById('currentProjectName').textContent = 'Wybierz projekt';
+                    document.getElementById('resetBtn').style.display = 'none';
+                    document.getElementById('okButton').disabled = true;
+                    document.getElementById('okButton').style.opacity = '0.5';
+                    renderEmptyState();
+                }
+                
+                saveData();
+                renderProjectList();
+                console.log('Usunięto projekt:', projectName);
+            }
         }
 
-        // Create ripple effect
+        // Reset aktualnego projektu (wyczyść ilości)
+        function resetCurrentProject() {
+            if (!currentProject) return;
+            
+            if (confirm('Czy na pewno chcesz wyzerować wszystkie ilości w tym projekcie?')) {
+                currentItems = currentItems.map(item => ({ ...item, quantity: 0 }));
+                projects[currentProject] = [...currentItems];
+                saveData();
+                renderItems();
+                updateStats();
+            }
+        }
+
+        // ==================== INTERFEJS PROJEKTÓW ====================
+
+        // Pokazywanie modalu projektów
+        function showProjectModal() {
+            renderProjectList();
+            document.getElementById('projectModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Ukrywanie modalu projektów
+        function hideProjectModal() {
+            document.getElementById('projectModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Renderowanie listy projektów w modalu
+        function renderProjectList() {
+            const projectList = document.getElementById('projectList');
+            projectList.innerHTML = '';
+
+            if (Object.keys(projects).length === 0) {
+                projectList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Brak projektów. Utwórz pierwszy projekt poniżej.</p>';
+                return;
+            }
+
+            Object.keys(projects).forEach(projectName => {
+                const projectDiv = document.createElement('div');
+                projectDiv.className = `project-item ${currentProject === projectName ? 'active' : ''}`;
+                
+                projectDiv.innerHTML = `
+                    <div class="project-name">${projectName}</div>
+                    <button class="delete-project-btn" onclick="deleteProject('${projectName}')" title="Usuń projekt">
+                        ✕
+                    </button>
+                `;
+                
+                // Dodaj event listener do wyboru projektu (ale nie na przycisk usuwania)
+                projectDiv.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('delete-project-btn')) {
+                        selectProject(projectName);
+                        hideProjectModal();
+                    }
+                });
+                
+                projectList.appendChild(projectDiv);
+            });
+        }
+
+        // ==================== ZARZĄDZANIE LISTĄ ZAKUPÓW ====================
+
+        // Tworzenie efektu ripple dla przycisków
         function createRipple(event, element) {
             const ripple = document.createElement('span');
             const rect = element.getBoundingClientRect();
@@ -512,54 +872,84 @@
             }, 600);
         }
 
-        // Increase quantity
+        // Zwiększanie ilości materiału
         function increaseQuantity(id, event) {
-            const item = items.find(item => item.id === id);
-            if (item) {
+            // Zapobiegaj podwójnemu kliknięciu
+            if (event.target.disabled) return;
+            event.target.disabled = true;
+            setTimeout(() => event.target.disabled = false, 200);
+
+            const item = currentItems.find(item => item.id === id);
+            if (item && currentProject) {
                 item.quantity++;
+                
+                // Zapisz zmiany w projekcie
+                projects[currentProject] = [...currentItems];
                 saveData();
+                
                 renderItems();
                 updateStats();
                 
-                // Add ripple effect
+                // Dodaj efekt ripple
                 createRipple(event, event.currentTarget);
                 
-                // Add animation to item
+                // Animacja elementu
                 const itemElement = document.querySelector(`[data-id="${id}"]`);
-                itemElement.style.transform = 'scale(1.02)';
-                setTimeout(() => {
-                    itemElement.style.transform = 'scale(1)';
-                }, 150);
+                if (itemElement) {
+                    itemElement.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        itemElement.style.transform = 'scale(1)';
+                    }, 150);
+                }
             }
         }
 
-        // Decrease quantity
+        // Zmniejszanie ilości materiału
         function decreaseQuantity(id, event) {
-            const item = items.find(item => item.id === id);
-            if (item && item.quantity > 0) {
+            // Zapobiegaj podwójnemu kliknięciu
+            if (event.target.disabled) return;
+            event.target.disabled = true;
+            setTimeout(() => event.target.disabled = false, 200);
+
+            const item = currentItems.find(item => item.id === id);
+            if (item && item.quantity > 0 && currentProject) {
                 item.quantity--;
+                
+                // Zapisz zmiany w projekcie
+                projects[currentProject] = [...currentItems];
                 saveData();
+                
                 renderItems();
                 updateStats();
                 
-                // Add ripple effect
+                // Dodaj efekt ripple
                 createRipple(event, event.currentTarget);
                 
-                // Add animation to item
+                // Animacja elementu
                 const itemElement = document.querySelector(`[data-id="${id}"]`);
-                itemElement.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    itemElement.style.transform = 'scale(1)';
-                }, 150);
+                if (itemElement) {
+                    itemElement.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        itemElement.style.transform = 'scale(1)';
+                    }, 150);
+                }
             }
         }
 
-        // Render items
+        // ==================== RENDEROWANIE INTERFEJSU ====================
+
+        // Renderowanie listy materiałów
         function renderItems() {
             const shoppingList = document.getElementById('shoppingList');
+            
+            if (!currentProject) {
+                renderEmptyState();
+                return;
+            }
+
             shoppingList.innerHTML = '';
 
-            items.forEach(item => {
+            currentItems.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `item ${item.quantity > 0 ? 'active' : ''}`;
                 itemDiv.setAttribute('data-id', item.id);
@@ -570,9 +960,9 @@
                         ${item.quantity > 0 ? `<span class="quantity-badge">${item.quantity}</span>` : ''}
                     </div>
                     <div class="controls">
-                        <button class="btn btn-decrease" onclick="decreaseQuantity(${item.id}, event)">−</button>
+                        <button class="btn btn-decrease" onclick="decreaseQuantity(${item.id}, event)" title="Zmniejsz ilość">−</button>
                         <span class="quantity-display">${item.quantity}</span>
-                        <button class="btn btn-increase" onclick="increaseQuantity(${item.id}, event)">+</button>
+                        <button class="btn btn-increase" onclick="increaseQuantity(${item.id}, event)" title="Zwiększ ilość">+</button>
                     </div>
                 `;
                 
@@ -580,30 +970,41 @@
             });
         }
 
-        // Update statistics
+        // Renderowanie pustego stanu (brak wybranego projektu)
+        function renderEmptyState() {
+            const shoppingList = document.getElementById('shoppingList');
+            shoppingList.innerHTML = `
+                <div style="text-align: center; padding: 50px; color: #b0b0b0;">
+                    <h3>Wybierz lub utwórz projekt</h3>
+                    <p>Kliknij "Projekty" aby rozpocząć</p>
+                </div>
+            `;
+        }
+
+        // Aktualizacja statystyk
         function updateStats() {
-            const selectedCount = items.filter(item => item.quantity > 0).length;
+            const selectedCount = currentItems.filter(item => item.quantity > 0).length;
             document.getElementById('selectedCount').textContent = selectedCount;
         }
 
-        // Reset list
-        function resetList() {
-            if (confirm('Czy na pewno chcesz wyzerować wszystkie ilości?')) {
-                items = items.map(item => ({ ...item, quantity: 0 }));
-                saveData();
-                renderItems();
-                updateStats();
-            }
-        }
+        // ==================== PODSUMOWANIE ====================
 
-        // Show summary modal
+        // Pokazywanie podsumowania zakupów
         function showSummary() {
-            const itemsWithQuantity = items.filter(item => item.quantity > 0);
-            
-            if (itemsWithQuantity.length === 0) {
-                alert('Nie wybrano żadnych materiałów do zakupu.');
+            if (!currentProject) {
+                alert('Nie wybrano projektu!');
                 return;
             }
+
+            const itemsWithQuantity = currentItems.filter(item => item.quantity > 0);
+            
+            if (itemsWithQuantity.length === 0) {
+                alert('Nie wybrano żadnych materiałów do zakupu w tym projekcie.');
+                return;
+            }
+
+            // Ustaw nazwę projektu w headerze podsumowania
+            document.getElementById('summaryProjectName').textContent = `Projekt: ${currentProject}`;
 
             const summaryContent = document.getElementById('summaryContent');
             const totalItems = itemsWithQuantity.reduce((sum, item) => sum + item.quantity, 0);
@@ -620,33 +1021,180 @@
                 summaryContent.appendChild(summaryItem);
             });
             
-            document.getElementById('totalText').textContent = `Łącznie: ${totalItems} ${totalItems === 1 ? 'pozycja' : totalItems < 5 ? 'pozycje' : 'pozycji'}`;
-            document.getElementById('summaryModal').classList.add('show');
+            // Ustaw tekst z podsumowaniem
+            const totalText = `Łącznie: ${totalItems} ${
+                totalItems === 1 ? 'pozycja' : 
+                totalItems < 5 ? 'pozycje' : 'pozycji'
+            }`;
+            document.getElementById('totalText').textContent = totalText;
             
-            // Prevent body scrolling
+            // Pokaż modal
+            document.getElementById('summaryModal').classList.add('show');
             document.body.style.overflow = 'hidden';
         }
 
-        // Hide summary modal
+        // Ukrywanie podsumowania
         function hideSummary() {
             document.getElementById('summaryModal').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside
+        // ==================== EVENT LISTENERS I INICJALIZACJA ====================
+
+        // Zamknięcie modali po kliknięciu w tło
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideProjectModal();
+            }
+        });
+
         document.getElementById('summaryModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 hideSummary();
             }
         });
 
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            
-            // Add touch feedback for mobile
-            document.addEventListener('touchstart', function() {}, {passive: true});
+        // Obsługa Enter w formularzu nowego projektu
+        document.getElementById('newProjectName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                createNewProject();
+            }
         });
+
+        // Inicjalizacja aplikacji
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inicjalizacja aplikacji Lista Zakupów...');
+            
+            loadData();
+            renderProjectList();
+            
+            // Jeśli nie ma aktualnego projektu, pokaż pusty stan
+            if (!currentProject) {
+                renderEmptyState();
+                updateStats();
+            }
+            
+            // Dodaj obsługę touch events dla lepszej responsywności na mobile
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Rejestracja Service Worker dla PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker zarejestrowany pomyślnie:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Rejestracja Service Worker nieudana:', error);
+                    });
+            }
+            
+            // PWA Install Prompt
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                showInstallButton();
+            });
+            
+            function showInstallButton() {
+                const installBtn = document.createElement('button');
+                installBtn.textContent = 'Zainstaluj';
+                installBtn.className = 'project-btn';
+                installBtn.style.position = 'absolute';
+                installBtn.style.top = '20px';
+                installBtn.style.left = '20px';
+                installBtn.onclick = installApp;
+                document.querySelector('.header').appendChild(installBtn);
+            }
+            
+            function installApp() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('Użytkownik zaakceptował instalację');
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            }
+            
+            console.log('Aplikacja Lista Zakupów gotowa do użycia!');
+        });
+
+        // ==================== FUNKCJE POMOCNICZE ====================
+
+        // Debug - wyświetl wszystkie dane w konsoli
+        function debugShowData() {
+            console.log('=== DEBUG INFO ===');
+            console.log('Aktualny projekt:', currentProject);
+            console.log('Wszystkie projekty:', projects);
+            console.log('Aktualne elementy:', currentItems);
+            console.log('==================');
+        }
+
+        // Eksport danych do JSON (dla backupu)
+        function exportData() {
+            const dataToExport = {
+                projects: projects,
+                currentProject: currentProject,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'lista_zakupow_backup.json';
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            console.log('Dane wyeksportowane do pliku JSON');
+        }
+
+        // Import danych z JSON (dla przywracania backupu)
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    if (importedData.projects) {
+                        if (confirm('Czy na pewno chcesz zastąpić wszystkie istniejące projekty importowanymi danymi?')) {
+                            projects = importedData.projects;
+                            currentProject = importedData.currentProject || null;
+                            saveData();
+                            
+                            if (currentProject && projects[currentProject]) {
+                                selectProject(currentProject);
+                            } else {
+                                renderEmptyState();
+                                updateStats();
+                            }
+                            
+                            renderProjectList();
+                            alert('Dane zostały pomyślnie zaimportowane!');
+                        }
+                    } else {
+                        alert('Nieprawidłowy format pliku!');
+                    }
+                } catch (error) {
+                    alert('Błąd podczas importowania danych: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Globalne funkcje dostępne w konsoli deweloperskiej
+        window.debugShowData = debugShowData;
+        window.exportData = exportData;
+        window.importData = importData;
+
     </script>
 </body>
 </html>
