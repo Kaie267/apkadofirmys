@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Zakupów - Materiały Budowlane</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Lista Zakupów">
+    <meta name="description" content="Aplikacja do tworzenia listy zakupów materiałów budowlanych">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon and Apple Touch Icons -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzAwN2JmZiIvPgo8cGF0aCBkPSJNOSAxMkgxOVYyMEg5VjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTIxIDEySDIzVjIwSDIxVjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTkgOEgyM1YxMEg5VjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiMwMDdiZmYiLz4KPHA+dGggZD0iTTUwIDY3SDEwN1YxMTNINTBWNjdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTE3IDY3SDEzMFYxMTNIMTE3VjY3WiIgZmlsbD0id2hpdGUiLz4KPHA+dGggZD0iTTUwIDQ1SDEzMFY1OEg1MFY0NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .reset-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .shopping-list {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .item.active {
+            background: linear-gradient(145deg, #e3f2fd, #f8f9ff);
+            border-left-color: #2196f3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+        }
+
+        .item-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #495057;
+            transition: color 0.3s ease;
+        }
+
+        .item.active .item-name {
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .quantity-badge {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 24px;
+            text-align: center;
+            transform: scale(0);
+            animation: popIn 0.3s ease forwards;
+        }
+
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            transform: scale(0.9);
+        }
+
+        .btn-increase {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-increase:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .btn-decrease {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-decrease:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .footer {
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats {
+            flex: 1;
+        }
+
+        .stats-text {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .stats-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .ok-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ok-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .ok-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Animacja ripple dla przycisków */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Modal dla podsumowania */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 80%;
+            width: 400px;
+            margin: 20px;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .modal-body {
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-name {
+            flex: 1;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .summary-quantity {
+            font-weight: bold;
+            color: #28a745;
+            background: #e8f5e8;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+            background: #f8f9fa;
+        }
+
+        .total-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        /* Responsywność */
+        @media (max-width: 480px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .item {
+                margin-bottom: 8px;
+                padding: 12px;
+            }
+            
+            .btn {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Lista Zakupów</h1>
+            <p>Materiały budowlane</p>
+            <button class="reset-btn" onclick="resetList()">Wyczyść</button>
+        </header>
+
+        <main class="shopping-list" id="shoppingList">
+            <!-- Items will be generated by JavaScript -->
+        </main>
+
+        <footer class="footer">
+            <div class="stats">
+                <div class="stats-text">Wybrane pozycje:</div>
+                <div class="stats-number" id="selectedCount">0</div>
+            </div>
+            <button class="ok-btn" onclick="showSummary()">OK</button>
+        </footer>
+    </div>
+
+    <!-- Modal for summary -->
+    <div class="modal" id="summaryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Lista Zakupów</h2>
+                <p>Podsumowanie materiałów</p>
+            </div>
+            <div class="modal-body" id="summaryContent">
+                <!-- Summary items will be generated here -->
+            </div>
+            <div class="modal-footer">
+                <div class="total-text" id="totalText">Łącznie: 0 pozycji</div>
+                <button class="back-btn" onclick="hideSummary()">Powrót do Listy</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initial items data
+        const initialItems = [
+            { id: 1, name: 'Strimel', quantity: 0 },
+            { id: 2, name: 'Medium Sparkel', quantity: 0 },
+            { id: 3, name: 'Jotun Sparkel', quantity: 0 },
+            { id: 4, name: 'Votrom Sparkel', quantity: 0 },
+            { id: 5, name: 'Pulver', quantity: 0 },
+            { id: 6, name: 'Narożniki', quantity: 0 },
+            { id: 7, name: 'Papiery do szlifowania', quantity: 0 },
+            { id: 8, name: 'Votrom Lim', quantity: 0 },
+            { id: 9, name: 'Vipsy', quantity: 0 },
+            { id: 10, name: 'Worki na śmieci', quantity: 0 },
+            { id: 11, name: 'Grunt', quantity: 0 },
+            { id: 12, name: 'Farby', quantity: 0 }
+        ];
+
+        let items = [...initialItems];
+
+        // Load data from localStorage on page load
+        function loadData() {
+            const savedData = localStorage.getItem('shoppingList');
+            if (savedData) {
+                items = JSON.parse(savedData);
+            }
+            renderItems();
+            updateStats();
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('shoppingList', JSON.stringify(items));
+        }
+
+        // Create ripple effect
+        function createRipple(event, element) {
+            const ripple = document.createElement('span');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.classList.add('ripple');
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            element.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Increase quantity
+        function increaseQuantity(id, event) {
+            const item = items.find(item => item.id === id);
+            if (item) {
+                item.quantity++;
+                saveData();
+                renderItems();
+                updateStats();
+                
+                // Add ripple effect
+                createRipple(event, event.currentTarget);
+                
+                // Add animation to item
+                const itemElement = document.querySelector(`[data-id="${id}"]`);
+                itemElement.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    itemElement.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(id, event) {
+            const item = items.find(item => item.id === id);
+            if (item && item.quantity > 0) {
+                item.quantity--;
+                saveData();
+                renderItems();
+                updateStats();
+                
+                // Add ripple effect
+                createRipple(event, event.currentTarget);
+                
+                // Add animation to item
+                const itemElement = document.querySelector(`[data-id="${id}"]`);
+                itemElement.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    itemElement.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        // Render items
+        function renderItems() {
+            const shoppingList = document.getElementById('shoppingList');
+            shoppingList.innerHTML = '';
+
+            items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `item ${item.quantity > 0 ? 'active' : ''}`;
+                itemDiv.setAttribute('data-id', item.id);
+                
+                itemDiv.innerHTML = `
+                    <div class="item-info">
+                        <span class="item-name">${item.name}</span>
+                        ${item.quantity > 0 ? `<span class="quantity-badge">${item.quantity}</span>` : ''}
+                    </div>
+                    <div class="controls">
+                        <button class="btn btn-decrease" onclick="decreaseQuantity(${item.id}, event)">−</button>
+                        <span class="quantity-display">${item.quantity}</span>
+                        <button class="btn btn-increase" onclick="increaseQuantity(${item.id}, event)">+</button>
+                    </div>
+                `;
+                
+                shoppingList.appendChild(itemDiv);
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            const selectedCount = items.filter(item => item.quantity > 0).length;
+            document.getElementById('selectedCount').textContent = selectedCount;
+        }
+
+        // Reset list
+        function resetList() {
+            if (confirm('Czy na pewno chcesz wyzerować wszystkie ilości?')) {
+                items = items.map(item => ({ ...item, quantity: 0 }));
+                saveData();
+                renderItems();
+                updateStats();
+            }
+        }
+
+        // Show summary modal
+        function showSummary() {
+            const itemsWithQuantity = items.filter(item => item.quantity > 0);
+            
+            if (itemsWithQuantity.length === 0) {
+                alert('Nie wybrano żadnych materiałów do zakupu.');
+                return;
+            }
+
+            const summaryContent = document.getElementById('summaryContent');
+            const totalItems = itemsWithQuantity.reduce((sum, item) => sum + item.quantity, 0);
+            
+            summaryContent.innerHTML = '';
+            
+            itemsWithQuantity.forEach(item => {
+                const summaryItem = document.createElement('div');
+                summaryItem.className = 'summary-item';
+                summaryItem.innerHTML = `
+                    <span class="summary-name">${item.name}</span>
+                    <span class="summary-quantity">${item.quantity} szt.</span>
+                `;
+                summaryContent.appendChild(summaryItem);
+            });
+            
+            document.getElementById('totalText').textContent = `Łącznie: ${totalItems} ${totalItems === 1 ? 'pozycja' : totalItems < 5 ? 'pozycje' : 'pozycji'}`;
+            document.getElementById('summaryModal').classList.add('show');
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Hide summary modal
+        function hideSummary() {
+            document.getElementById('summaryModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('summaryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideSummary();
+            }
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            
+            // Add touch feedback for mobile
+            document.addEventListener('touchstart', function() {}, {passive: true});
+        });
+    </script>
+</body>
+</html>
