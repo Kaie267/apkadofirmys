@@ -555,6 +555,20 @@
             .project-info {
                 order: -1;
             }
+            .copy-btn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #f57c00;
+}
         }
 
         /* Animacja ripple dla przycisków */
@@ -645,12 +659,14 @@
             <div class="modal-body" id="summaryContent">
                 <!-- Pozycje podsumowania będą tutaj generowane -->
             </div>
-            <div class="modal-footer">
-                <div class="total-text" id="totalText">Łącznie: 0 pozycji</div>
-                <button class="back-btn" onclick="hideSummary()">Powrót do Listy</button>
-            </div>
-        </div>
+       <div class="modal-footer">
+    <div class="total-text" id="totalText">Łącznie: 0 pozycji</div>
+    <div class="summary-buttons">
+        <button class="back-btn" onclick="hideSummary()">Powrót do Listy</button>
+        <button class="save-btn" onclick="saveShoppingList()">Zapisz Listę</button>
+        <button class="copy-btn" onclick="copyShoppingList()">Kopiuj</button>
     </div>
+</div>
 
     <script>
         // ==================== DANE I KONFIGURACJA ====================
@@ -1038,6 +1054,47 @@
             document.getElementById('summaryModal').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
+
+        // ==================== KOPIOWANIE LISTY ZAKUPÓW ====================
+
+// Kopiowanie listy zakupów do schowka
+function copyShoppingList() {
+    if (!currentProject) return;
+    
+    const itemsWithQuantity = currentItems.filter(item => item.quantity > 0);
+    
+    if (itemsWithQuantity.length === 0) {
+        alert('Nie ma nic do skopiowania!');
+        return;
+    }
+    
+    // Przygotuj tekst do skopiowania
+    let copyText = `Lista zakupów - ${currentProject}\n`;
+    copyText += `Data: ${new Date().toLocaleDateString('pl-PL')}\n\n`;
+    
+    itemsWithQuantity.forEach(item => {
+        copyText += `${item.name} ${item.quantity}x\n`;
+    });
+    
+    copyText += `\nŁącznie: ${itemsWithQuantity.reduce((sum, item) => sum + item.quantity, 0)} pozycji`;
+    
+    // Skopiuj do schowka
+    navigator.clipboard.writeText(copyText)
+        .then(() => {
+            showNotification('Lista zakupów skopiowana do schowka!');
+        })
+        .catch(err => {
+            console.error('Błąd podczas kopiowania:', err);
+            // Fallback dla przeglądarek bez wsparcia Clipboard API
+            const textArea = document.createElement('textarea');
+            textArea.value = copyText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showNotification('Lista zakupów skopiowana do schowka!');
+        });
+}
 
         // ==================== EVENT LISTENERS I INICJALIZACJA ====================
 
